@@ -64,10 +64,11 @@ def vis_bbox(img, bbox, label=None, score=None, ax=None):
     if score is not None and len(score) != len(bbox):
         raise ValueError('bbox와 score의 길이가 다릅니다')
 
+    fig, ax = plt.subplots()
     ax = vis_image(img, ax=ax)
 
     if len(bbox) == 0:
-        return ax
+        return fig, ax
 
     for i, bb in enumerate(bbox):
         xy = (bb[1], bb[0])
@@ -97,13 +98,16 @@ def vis_bbox(img, bbox, label=None, score=None, ax=None):
                 style='italic',
                 bbox={'facecolor': 'white', 'alpha': 0.5, 'pad': 0}
             )
-    return ax
+    return fig, ax
 
 
 def fig2data(fig):
     """
     Matplotlib Figure -> RGBA 형태 (H, W, 4)의 numpy 배열로 변환
     """
+    if isinstance(fig, plt.Axes):  # Axes 객체일 경우 Figure로 변환
+        fig = fig.figure
+    
     fig.canvas.draw()
     w, h = fig.canvas.get_width_height()
 
@@ -131,7 +135,7 @@ def visdom_bbox(*args, **kwargs):
     """
     vis_bbox 결과를 (C,H,W) ndarray로 변환해 반환
     """
-    fig = vis_bbox(*args, **kwargs)
+    fig, ax = vis_bbox(*args, **kwargs)
     data = fig4vis(fig)
     return data
 

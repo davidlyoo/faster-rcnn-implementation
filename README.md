@@ -14,11 +14,11 @@ Faster R-CNN은 CNN 기반의 대표적인 객체 탐지 알고리즘으로, **R
 ###  환경 설정
 ```bash
 # Conda 환경 생성
-conda create --name faster_rcnn python=3.7
+conda create --name faster_rcnn python=3.8
 conda activate faster_rcnn
 
 # PyTorch 설치
-conda install pytorch torchvision cudatoolkit=10.2 -c pytorch
+conda install pytorch torchvision pytorch-cuda=11.8 -c pytorch -c nvidia
 
 # 의존성 패키지 설치
 pip install -r requirements.txt
@@ -45,7 +45,7 @@ tar xvf VOCdevkit_08-Jun-2007.tar
 `utils/config.py` 파일에서 `voc_data_dir` 경로를 설정하세요.
 ```python
 class Config:
-    voc_data_dir = '/dataset/PASCAL2007/VOC2007'
+    voc_data_dir = '/dataset/PASCAL2007/VOCdevkit/VOC2007'
 ```
 > 💡 기본 경로를 유지하려면 심볼릭 링크를 사용할 수도 있습니다.
 ```bash
@@ -64,7 +64,7 @@ python train.py train --env='fasterrcnn' --plot-every=100
 |---------------|---------------------------------------|-------|
 | `--plot-every` | 매 `n`번째 배치마다 예측 및 손실 시각화 수행  | `100` |
 | `--env`       | Visdom 시각화 환경 이름 설정              | `'fasterrcnn'` |
-| `--voc_data_dir` | PASCAL VOC 데이터셋이 저장된 디렉토리 지정 | `'/dataset/PASCAL2007/VOC2007'` |
+| `--voc_data_dir` | PASCAL VOC 데이터셋이 저장된 디렉토리 지정 | `'/dataset/PASCAL2007/VOCdevkit/VOC2007'` |
 | `--use-drop`  | RoI Head에서 Dropout 사용 여부          | `False` |
 | `--use-Adam`  | 기본 옵티마이저(SGD) 대신 Adam 사용      | `False` |
 | `--load-path` | 사전 학습된 모델 경로 지정               | `None` |

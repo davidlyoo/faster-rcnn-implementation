@@ -6,7 +6,7 @@ import time
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import torchnet.meter.ConfusionMeter, AverageValueMeter
+from torchnet.meter import ConfusionMeter, AverageValueMeter
 from collections import namedtuple
 
 from utils import array_tool as at
@@ -119,8 +119,11 @@ class FasterRCNNTrainer(nn.Module):
             self.rpn_sigma
         )
 
+        # RPN 손실 계산 시 -1을 무시하도록 필터링 추가
         rpn_cls_loss = F.cross_entropy(rpn_score, gt_rpn_label.cuda(), ignore_index=-1)
-        self.rpn_cm.add(at.totensor(rpn_score, False), gt_rpn_label.data.long())
+        _gt_rpn_label = gt_rpn_label[gt_rpn_label > -1]
+        _rpn_score = at.tonumpy(rpn_score)[at.tonumpy(gt_rpn_label) > -1]
+        self.rpn_cm.add(at.totensor(_rpn_score, False), _gt_rpn_label.data.long())
 
         # ------------------ ROI 손실 계산 -------------------#
         n_sample = roi_cls_loc.shape[0]

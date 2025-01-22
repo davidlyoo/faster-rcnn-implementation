@@ -10,6 +10,13 @@ class VOCBboxDataset:
     """
     PASCAL VOC 데이터셋을 로드하여 이미지, 바운딩 박스, 라벨을 반환하는 클래스
     """
+    VOC_BBOX_LABEL_NAMES = (
+        'aeroplane', 'bicycle', 'bird', 'boat', 'bottle',
+        'bus', 'car', 'cat', 'chair', 'cow',
+        'diningtable', 'dog', 'horse', 'motorbike', 'person',
+        'pottedplant', 'sheep', 'sofa', 'train', 'tvmonitor'
+    )
+    
     def __init__(self, data_dir, split='trainval', use_difficult=False, return_difficult=False):
         id_list_file = os.path.join(
             data_dir, f'ImageSets/Main/{split}.txt')
@@ -53,11 +60,3 @@ class VOCBboxDataset:
         if self.return_difficult:
             return img, bbox, label, difficult
         return img, bbox, label
-
-
-VOC_BBOX_LABEL_NAMES = (
-    'aeroplane', 'bicycle', 'bird', 'boat', 'bottle',
-    'bus', 'car', 'cat', 'chair', 'cow',
-    'diningtable', 'dog', 'horse', 'motorbike', 'person',
-    'pottedplant', 'sheep', 'sofa', 'train', 'tvmonitor'
-)

@@ -3,7 +3,7 @@ from pprint import pprint
 
 class Config:
     # 데이터셋 및 이미지 크기 설정
-    voc_data_dir = '/dataset/PASCAL2007/VOC2007'
+    voc_data_dir = '/dataset/PASCAL2007/VOCdevkit/VOC2007' # 데이터셋 폴더의 절대 경로로 수정
     min_size = 600
     max_size = 1000
 
@@ -44,7 +44,7 @@ class Config:
         """
         state_dict = self._state_dict()
         for k, v in kwargs.items():
-            if k not in state_dict():
+            if k not in state_dict:
                 raise ValueError('Unknown Option: "--%s"' % k)
             setattr(self, k, v)
 
