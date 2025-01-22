@@ -3,6 +3,5 @@ scikit-image
 tqdm
 fire
 ipdb
-pprint
 matplotlib
 torchnet

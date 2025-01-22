@@ -74,9 +74,9 @@ python train.py train --env='fasterrcnn' --plot-every=100
 python -m visdom.server
 ```
 웹 브라우저에서 [http://localhost:8097](http://localhost:8097)에 접속하여 학습 과정을 실시간으로 모니터링하세요.
-| training_detection_1.png | training_detection_2.png| training_detection_3.png | training_detection_4.png |
-|--------------|--------------|--------------|--------------|
-| ![training_detection_1](images/1.png) | ![training_detection_2](images/2.png) | ![training_detection_3](images/3.png) | ![training_detection_4](images/4.png) |
+| training_detection_1.png | training_detection_2.png|
+|--------------|--------------|
+| ![training_detection_1](images/1.png) | ![training_detection_2](images/2.png) |
 
 ---
 ## 📂 프로젝트 폴더 구조
