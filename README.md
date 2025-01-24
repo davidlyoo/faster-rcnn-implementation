@@ -49,7 +49,7 @@ class Config:
 ```
 > 💡 기본 경로를 유지하려면 심볼릭 링크를 사용할 수도 있습니다.
 ```bash
-ln -s /path/to/your/VOC2007 /dataset/PASCAL2007/VOC2007
+ln -s /path/to/your/VOC2007 /dataset/PASCAL2007/VOCdevkit/VOC2007
 ```
 
 ---
